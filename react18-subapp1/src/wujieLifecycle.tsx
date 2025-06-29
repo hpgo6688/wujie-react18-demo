@@ -5,24 +5,38 @@ import App from "./App";
 let root: ReactDOM.Root | null = null;
 
 export async function bootstrap() {
-  console.log("子应用 bootstrap");
+  console.log("子应用1 bootstrap");
 }
 
 export async function mount(props: any) {
-  console.log("子应用 mount", props);
+  console.log("子应用1 mount", props);
   const container = props.container
     ? props.container.querySelector("#root")
     : document.getElementById("root");
-  if (!container) return;
+  
+  if (!container) {
+    console.error("子应用1: 找不到容器元素");
+    return;
+  }
 
-  root = ReactDOM.createRoot(container);
-  root.render(<App />);
+  try {
+    root = ReactDOM.createRoot(container);
+    root.render(<App />);
+    console.log("子应用1: 渲染成功");
+  } catch (error) {
+    console.error("子应用1: 渲染失败", error);
+  }
 }
 
 export async function unmount(props: any) {
-  console.log("子应用 unmount");
+  console.log("子应用1 unmount");
   if (root) {
-    root.unmount();
-    root = null;
+    try {
+      root.unmount();
+      root = null;
+      console.log("子应用1: 卸载成功");
+    } catch (error) {
+      console.error("子应用1: 卸载失败", error);
+    }
   }
 }
