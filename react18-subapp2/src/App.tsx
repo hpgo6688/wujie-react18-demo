@@ -1,10 +1,14 @@
-import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./HomePage";
+
 
 export default function App() {
   return (
-    <div style={{ padding: 20, backgroundColor: "#f0f0f0" }}>
-      <h2>React 18 子应用 2</h2>
-      <p>这是通过 Wujie 加载的微前端示例。</p>
-    </div>
+    <BrowserRouter basename="/react18-subapp2">
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        {/* 其他子应用路由 */}
+      </Routes>
+    </BrowserRouter>
   );
 }
